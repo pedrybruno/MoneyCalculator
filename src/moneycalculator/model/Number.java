@@ -36,27 +36,57 @@ public class Number {
     public long getDenominator() {
         return denominator;
     }
-    
+
     private void reduce() {
         int[] primeNumbers = getPrimeNumbers();
         for (int primeNumber : primeNumbers) {
-            while (isReducible(primeNumber)){
+            while (isReducible(primeNumber)) {
                 numerator /= primeNumber;
                 denominator /= primeNumber;
             }
         }
     }
-    
+
     private int[] getPrimeNumbers() {
-        return new int[]{2,3,4,5,7,11,13,17,23};
+        return new int[]{2, 3, 4, 5, 7, 11, 13, 17, 23};
     }
 
     private boolean isReducible(int primeNumber) {
         return (numerator % primeNumber == 0) && (denominator % primeNumber == 0);
     }
 
-    public Number add(Number number){
-        if (denominator == number.denominator)
-            return 
+    public Number add(Number number) {
+        if (denominator == number.denominator) {
+            return new Number(numerator + number.numerator, denominator);
+        }
+        Number addNumber = new Number((denominator * number.denominator) / (denominator) * numerator
+                + (denominator * number.denominator) / (number.denominator) * numerator,
+                denominator * numerator);
+        return addNumber;
+    }
+
+    public Number subtract(Number number) {
+        if (denominator == number.denominator) {
+            return new Number(numerator + number.numerator, denominator);
+        }
+        Number subtractNumber = new Number((denominator * number.denominator) / (denominator) * numerator
+                - (denominator * number.denominator) / (number.denominator) * numerator,
+                denominator * numerator);
+        return subtractNumber;
+    }
+
+    public Number multiply(Number number) {
+        return new Number(numerator * number.numerator, denominator * number.denominator);
+    }
+
+    public Number divide(Number number) {
+        Number divideNumber = new Number(numerator * number.denominator, denominator * number.numerator);
+        return divideNumber;
+    }
+    
+    @Override
+    public String toString() {
+        String string = "";
+        return string + ((double) getNumerator() / (double) getDenominator());
     }
 }
