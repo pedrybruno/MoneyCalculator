@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
 import moneycalculator.model.Currency;
+import moneycalculator.model.CurrencySet;
 import moneycalculator.model.ExchangeRate;
 import moneycalculator.model.Money;
 import moneycalculator.model.MoneyExchanger;
+import moneycalculator.persistence.CurrencySetLoader;
 import moneycalculator.persistence.ExchangeRateLoader;
 import moneycalculator.ui.ConsoleCurrencyDialog;
 import moneycalculator.ui.ConsoleDateDialog;
@@ -20,16 +22,19 @@ public class ExchangeMoneyControl {
     private ConsoleMoneyViewer moneyViewer;
     private ExchangeRateLoader exchangeRateLoader;
     private ConsoleDateDialog dateDialog;
+    private CurrencySetLoader currencySetLoader;
 
-    public ExchangeMoneyControl(ConsoleMoneyDialog moneyDialog, ConsoleCurrencyDialog currencyDialog, ConsoleMoneyViewer moneyViewer, ExchangeRateLoader exchangeRateLoader, ConsoleDateDialog dateDialog) {
+    public ExchangeMoneyControl(ConsoleMoneyDialog moneyDialog, ConsoleCurrencyDialog currencyDialog, ConsoleMoneyViewer moneyViewer, ExchangeRateLoader exchangeRateLoader, ConsoleDateDialog dateDialog, CurrencySetLoader currencySetLoader) {
         this.moneyDialog = moneyDialog;
         this.currencyDialog = currencyDialog;
         this.moneyViewer = moneyViewer;
         this.exchangeRateLoader = exchangeRateLoader;
         this.dateDialog = dateDialog;
+        this.currencySetLoader = currencySetLoader;
     }
     
     public void execute() throws IOException, ParseException {
+        currencySetLoader.load();
         Date date = readDate();
         Money money = readMoney();
         Currency currency = readCurrency();

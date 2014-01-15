@@ -3,9 +3,10 @@ package moneycalculator;
 import java.io.IOException;
 import java.text.ParseException;
 import moneycalculator.control.ExchangeMoneyControl;
+import moneycalculator.persistence.CurrencySetLoader;
+import moneycalculator.persistence.DBCurrencySetLoader;
 import moneycalculator.persistence.DBExchangeRateLoader;
 import moneycalculator.persistence.ExchangeRateLoader;
-import moneycalculator.persistence.FileCurrencySetLoader;
 import moneycalculator.ui.ConsoleCurrencyDialog;
 import moneycalculator.ui.ConsoleDateDialog;
 import moneycalculator.ui.ConsoleMoneyDialog;
@@ -19,15 +20,13 @@ public class MoneyCalculator {
     }
 
     public void execute() throws IOException, ParseException, ClassNotFoundException {
-        FileCurrencySetLoader fileCurrencySetLoader = FileCurrencySetLoader.getInstance();
-        fileCurrencySetLoader.setFilename("/Users/Bruno/NetBeansProjects/MoneyCalculator/Rates.txt");
-        fileCurrencySetLoader.load();
         ConsoleMoneyDialog moneyDialog = new ConsoleMoneyDialog();
         ConsoleCurrencyDialog currencyDialog = new ConsoleCurrencyDialog();
         ConsoleDateDialog dateDialog = new ConsoleDateDialog();
         ConsoleMoneyViewer moneyViewer = new ConsoleMoneyViewer();
+        CurrencySetLoader CurrencySetLoader = DBCurrencySetLoader.getInstance();
         ExchangeRateLoader exchangeRateLoader = DBExchangeRateLoader.getInstance();
-        ExchangeMoneyControl exchangeMoneyControl = new ExchangeMoneyControl(moneyDialog, currencyDialog, moneyViewer, exchangeRateLoader, dateDialog);
+        ExchangeMoneyControl exchangeMoneyControl = new ExchangeMoneyControl(moneyDialog, currencyDialog, moneyViewer, exchangeRateLoader, dateDialog, CurrencySetLoader);
         exchangeMoneyControl.execute();
     }
 
