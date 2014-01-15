@@ -18,7 +18,7 @@ public class ConsoleCurrencyDialog {
             currency = CurrencySet.getInstance().get(reader.readLine());
             if (currency != null) break;    
             System.out.println();
-            System.out.println("Error: no se ha introducido un código de divisa válido");
+            System.out.println("Error: no se ha introducido un código de divisa válido"+ currency);
             System.out.println();
         }
     return currency;
