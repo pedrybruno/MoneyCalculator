@@ -1,2 +1,0 @@
-USD,Dollar,$
-EUR,Euro,€
