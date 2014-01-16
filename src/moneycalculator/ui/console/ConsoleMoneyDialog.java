@@ -1,4 +1,4 @@
-package moneycalculator.ui;
+package moneycalculator.ui.console;
 
 import java.io.BufferedReader;
 import java.io.IOException;

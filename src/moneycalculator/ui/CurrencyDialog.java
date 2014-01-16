@@ -4,8 +4,10 @@ import moneycalculator.model.Currency;
 
 public interface CurrencyDialog {
     
-    public Currency execute();
+    public void show();
     
     public Currency getCurrency();
+    
+    public void setCurrency(Currency currency);
     
 }
